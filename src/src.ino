@@ -2,6 +2,7 @@
 #include "WheelController.h"
 #include "IController.h"
 #include "WheelMovement.h"
+#include "IRServo.h"
 #include "IMovement.h"
 
 void setup() {
@@ -15,6 +16,14 @@ void loop() {
   wc->right();
   wc->backward();
   wc->forward();
+  IMovement *ir = new IRServo();
+  IController *ic = new WheelController(ir);
+  ic->left();
+  ic->right();
+  ic->backward();
+  ic->forward();
   delete wc;
   delete wm;
+  delete ir;
+  delete ic;
 }
