@@ -1,5 +1,6 @@
 #include <IRremote.h>
 #include "WheelController.h"
+#include "IRServoController.h"
 #include "IController.h"
 #include "WheelMovement.h"
 #include "IRServo.h"
@@ -10,20 +11,23 @@ void setup() {
 }
 void loop() {
   delay(1000);
-  IMovement *wm = new WheelMovement();
-  IController *wc = new WheelController(wm);
-  wc->left();
-  wc->right();
-  wc->backward();
-  wc->forward();
-  IMovement *ir = new IRServo();
-  IController *ic = new WheelController(ir);
-  ic->left();
-  ic->right();
-  ic->backward();
-  ic->forward();
-  delete wc;
-  delete wm;
-  delete ir;
-  delete ic;
+  WheelMovement wm;
+  IMovement *iwm = &wm;
+  WheelController wc(*iwm);
+  IController *iwc = &wc;
+  
+  iwc->left();
+  iwc->right();
+  iwc->backward();
+  iwc->forward();
+  
+  IRServo ir;
+  IMovement *irm = &ir;
+  IRServoController rc(*irm);
+  IController *irc = &rc;
+
+  irc->left();
+  irc->right();
+  irc->backward();
+  irc->forward();
 }

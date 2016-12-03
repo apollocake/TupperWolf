@@ -4,7 +4,7 @@
 class IController
 {
 public:
-    IController(){};
+    IController(){}
     IController(IMovement*& wm){}
     virtual ~IController(){}
     virtual void left()=0;

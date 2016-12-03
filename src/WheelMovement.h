@@ -7,17 +7,13 @@ class WheelMovement : public IMovement {
 private:
 
 public:
-  WheelMovement();
+  WheelMovement(){}
  ~WheelMovement(){}
  void left();
  void right();
  void backward();
  void forward();
 };
-
-WheelMovement::WheelMovement()
-{
-}
 
 void WheelMovement::left()
 {

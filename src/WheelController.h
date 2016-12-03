@@ -6,9 +6,10 @@
 
 class WheelController : public IController {
 private:
-IMovement *wm;
 public:
-  WheelController(IMovement*& wm);
+IMovement *wm;
+
+  WheelController(IMovement& wm);
  ~WheelController(){}
  void left();
  void right();
@@ -16,9 +17,9 @@ public:
  void forward();
 };
 
-WheelController::WheelController(IMovement*& wm)
+WheelController::WheelController(IMovement& wm)
 {
-  this->wm = wm;
+  this->wm = &wm;
 }
 
 void WheelController::left()

@@ -8,17 +8,13 @@ class IRServo : public IMovement {
 private:
 
 public:
-  IRServo();
+  IRServo(){}
  ~IRServo(){}
  void left();
  void right();
  void backward();
  void forward();
 };
-
-IRServo::IRServo()
-{
-}
 
 void IRServo::left()
 {
