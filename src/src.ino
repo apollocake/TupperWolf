@@ -41,7 +41,7 @@ void loop() {
   //    irrecv.resume(); // Receive the next value
 
   //calculate input after recieving
-  sensor_model.compute();
+  //sensor_model.compute();
 
   //if too left, go left
   //    if (sensor_model.getCorrectionDirection() == Direction::LEFT) {
@@ -65,16 +65,16 @@ void loop() {
   //wheel_controller->backward();
   //  }
   //in WheelMovement
-  byte powr = calculatePower(sensor_model.getOffset());
-  wheel_movement->setPower(powr);
-  wheel_controller->left();
-  stepper1.runSpeed();
-  stepper2.runSpeed();
+  //byte powr = calculatePower(sensor_model.getOffset());
+  //wheel_movement->setPower(powr);
+  //wheel_controller->left();
+  //stepper1.runSpeed();
+  //stepper2.runSpeed();
   
   //send the lejos code on Channel 0 to mimic beacon
   sensor_model.sendCodes();
   //irrecv.enableIRIn(); // Re-enable receiver
-  //delay(500);//must delay or tramples over reciever
+  //delay(0);//must delay or tramples over reciever
 }
 
 byte calculatePower(int offset) {
