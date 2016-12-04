@@ -1,5 +1,6 @@
 #include <IRremote.h>
 #include "WheelController.h"
+#include "IRServoController.h"
 #include "IController.h"
 #include "WheelMovement.h"
 #include "IRServo.h"
@@ -14,7 +15,7 @@ void setup() {
   wm = new WheelMovement();
   wc = new WheelController(wm);
   ir = new IRServo();
-  ic = new WheelController(ir);
+  ic = new IRServoController(ir);
 }
 void loop() {
 }
