@@ -37,37 +37,38 @@ void loop() {
 
   //move ir sensor
   //cycle_ir(ir_movement_handle, ir_controller_handle);
+  
   //gather sensor input
   if (irrecv.decode(&results)) {
     sensor_model.collect(ir_movement_handle->getPosition(), results.value);
     irrecv.resume(); // Receive the next value
+
+    //calculate input after recieving
+    sensor_model.compute();
+
+    //if too left, go left
+    if (sensor_model.getCorrectionDirection() == Direction::LEFT) {
+      //byte powr = calculatePower((sensor_model.getOffset()));
+      //wheel_movement->setPower(powr);
+      //wheel_controller->left();
+    }
+
+    //if too right, go right
+    //if(SensorModel.getCorrectionDirection() == Direction.Left);
+    //powr = PowerCalculator.calculatePower((SensorReporter.getOffset())));
+    //wheel_movement.setPower(powr);
+    //wheel_controller->right();
+
+    //if 'centered' go forward
+    //if(SensorModel.getCorrectionDirection() == Direction.Forward);
+    //wheel_controller->forward();
+  } else {
+    //if nothing detected
+    //if(SensorModel.getCorrectionDirection() == Direction.Backward);
+    //wheel_controller->backward();
   }
-
-  //calculate input after recieving
-  sensor_model.compute();
-
-  //if too left, go left
-  if (sensor_model.getCorrectionDirection() == Direction::LEFT) {
-    //byte powr = calculatePower((sensor_model.getOffset()));
-    //wheel_movement->setPower(powr);
-    //wheel_controller->left();
-  }
-
-  //if too right, go right
-  //if(SensorModel.getCorrectionDirection() == Direction.Left);
-  //powr = PowerCalculator.calculatePower((SensorReporter.getOffset())));
-  //wheel_movement.setPower(powr);
-  //wheel_controller->right();
-
-  //if 'centered' go forward
-  //if(SensorModel.getCorrectionDirection() == Direction.Forward);
-  //wheel_controller->forward();
-
-  //if nothing detected
-  //if(SensorModel.getCorrectionDirection() == Direction.Backward);
-  //wheel_controller->backward();
-
-    //send the lejos code on Channel 0 to mimic beacon
+  
+  //send the lejos code on Channel 0 to mimic beacon
   sensor_model.sendCodes();
   irrecv.enableIRIn(); // Re-enable receiver
   delay(500);//must delay or tramples over reciever
@@ -76,6 +77,7 @@ void loop() {
 byte calculatePower(int offset) {
   return 0;
 }
+//move the IR sensor around appropriately
 void cycle_ir(IRServoMovement *&ir_movement, IRServoController *&ir_controller) {
   if (ir_movement->limitReached()) {
     if (ir_movement->getDirection() == Direction::LEFT) {
