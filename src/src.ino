@@ -17,15 +17,4 @@ void setup() {
   ic = new WheelController(ir);
 }
 void loop() {
-  delay(1000);
-
-  wc->left();
-  wc->right();
-  wc->backward();
-  wc->forward();
-
-  ic->left();
-  ic->right();
-  ic->backward();
-  ic->forward();
 }
