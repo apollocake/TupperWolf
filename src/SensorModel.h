@@ -9,16 +9,17 @@ private:
 public:
  static void collect();
  static void compute();
+ static int getOffset();
  static Direction getCorrectionDirection();
 };
-SensorModel::SensorModel()
-{
-  //
-}
 
 Direction SensorModel::getCorrectionDirection()
 {
   return current_direction;
+}
+int SensorModel::getOffset()
+{
+  return 0;
 }
 void SensorModel::collect()
 {
