@@ -6,6 +6,7 @@
 #include "WheelMovement.h"
 #include "IRServoMovement.h"
 #include "IMovement.h"
+#include "Direction.h"
 
   IMovement *wheel_movement;
   IController *wheel_controller;
@@ -23,17 +24,18 @@ void loop() {
   //calculate in after recieving
   SensorModel::collect();
   SensorModel::compute();
-  
+
+  //if too left, go left
+  if(SensorModel::getCorrectionDirection() == Direction::FORWARD)
+    Serial.println("enums work");
   //powr = calculatePower((SensorReporter.getOffset())));
   //wheel_movement.setPower(powr);
-  //if too left, go left
-  //if(SensorModel.getCorrectionDirection() == Direction.Left);
   //wheel_controller->left();
 
-  //powr = PowerCalculator.calculatePower((SensorReporter.getOffset())));
-  //wheel_movement.setPower(powr);
   //if too right, go right
   //if(SensorModel.getCorrectionDirection() == Direction.Left);
+  //powr = PowerCalculator.calculatePower((SensorReporter.getOffset())));
+  //wheel_movement.setPower(powr);
   //wheel_controller->right();
 
   //if 'centered' go forward
