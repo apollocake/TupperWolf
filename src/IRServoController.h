@@ -2,7 +2,7 @@
 #define IR_SERVO_CONTROLLER
 #include "IController.h"
 #include "IMovement.h"
-#include "IRServo.h"
+#include "IRServoMovement.h"
 
 class IRServoController : public IController {
 private:

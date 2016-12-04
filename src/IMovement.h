@@ -9,5 +9,6 @@ public:
     virtual void right()=0;
     virtual void backward()=0;
     virtual void forward()=0;
+    virtual void setPower(byte power)=0;
 };
 #endif

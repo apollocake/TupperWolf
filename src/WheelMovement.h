@@ -13,6 +13,7 @@ public:
  void right();
  void backward();
  void forward();
+ void setPower(byte power);
 };
 
 WheelMovement::WheelMovement()
@@ -34,5 +35,9 @@ void WheelMovement::backward()
 void WheelMovement::forward()
 {
   Serial.println("forward");
+}
+void WheelMovement::setPower(byte power)
+{
+  Serial.println("Power not set");
 }
 #endif
