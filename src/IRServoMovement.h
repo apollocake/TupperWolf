@@ -6,7 +6,7 @@ using namespace std;
 
 class IRServoMovement : public IMovement {
 private:
-
+byte power;
 public:
   IRServoMovement();
  ~IRServoMovement(){}
@@ -19,6 +19,7 @@ public:
 
 IRServoMovement::IRServoMovement()
 {
+    power = 255;
 }
 
 void IRServoMovement::left()

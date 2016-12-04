@@ -5,7 +5,7 @@
 
 class WheelMovement : public IMovement {
 private:
-
+byte power;
 public:
   WheelMovement();
  ~WheelMovement(){}
@@ -18,6 +18,7 @@ public:
 
 WheelMovement::WheelMovement()
 {
+  power = 255;
 }
 
 void WheelMovement::left()
