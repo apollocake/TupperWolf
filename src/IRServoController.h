@@ -2,11 +2,13 @@
 #define IR_SERVO_CONTROLLER
 #include "IController.h"
 #include "IMovement.h"
+#include "Direction.h"
 #include "IRServoMovement.h"
 
 class IRServoController : public IController {
 private:
 IMovement *wm;
+Direction current_direction;
 public:
   IRServoController(IMovement*& wm);
  ~IRServoController(){};
@@ -14,11 +16,18 @@ public:
  void right();
  void backward();
  void forward();
+ void cycle();
+ Direction getCurrentDirection();
 };
 
 IRServoController::IRServoController(IMovement*& wm)
 {
   this->wm = wm;
+  current_direction = Direction::RIGHT;
+}
+Direction IRServoController::getCurrentDirection()
+{
+  return current_direction;
 }
 
 void IRServoController::left()
