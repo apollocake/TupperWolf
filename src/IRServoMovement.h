@@ -34,7 +34,7 @@ public:
 IRServoMovement::IRServoMovement()
 {
     myservo.attach(2); // attach servo to pin 2
-    power = 255;
+    power = 100;
     current_position = limit_l;
     current_direction = Direction::LEFT;
 }

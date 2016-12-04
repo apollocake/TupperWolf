@@ -8,7 +8,9 @@ class SensorModel {
     Direction correction_direction;
     IRsend irsend;
     static const int BIN_ARRAY_SIZE = 5;
+    static const int MIDPOINT_INDEX = 2;    
     int freq_bin[BIN_ARRAY_SIZE];
+    int target_bin_index;
   public:
     SensorModel();
     ~SensorModel() {}
@@ -21,15 +23,20 @@ class SensorModel {
 
 SensorModel::SensorModel() {
   correction_direction = Direction::FORWARD;
+  target_bin_index = 0;
 }
 
 Direction SensorModel::getCorrectionDirection()
 {
   return correction_direction;
 }
+//get the absolute value difference
 int SensorModel::getOffset()
 {
-  return 0;
+  if((MIDPOINT_INDEX - target_bin_index)> 0)
+    return MIDPOINT_INDEX - target_bin_index;
+  else
+    return target_bin_index - MIDPOINT_INDEX;
 }
 void SensorModel::collect(int current_position, unsigned long value)
 {
@@ -52,11 +59,11 @@ void SensorModel::compute()
 {
   //calculate the bins for each angle sampled
   int max_num = freq_bin[0];
-  int bin_index = 0;
+  target_bin_index = 0;
   for (int i = 0; i < BIN_ARRAY_SIZE; i++) {
     if (freq_bin[i] > max_num) {
       max_num = freq_bin[i];
-      bin_index = i;
+      target_bin_index = i;
     }
   }
   //reset if numbers get too big
@@ -66,10 +73,10 @@ void SensorModel::compute()
     }
   }
   //calculate the correct direction to move
-  if (bin_index < 2) {
+  if (target_bin_index < 2) {
     correction_direction = Direction::RIGHT;
   }
-  else if (bin_index > 2) {
+  else if (target_bin_index > 2) {
     correction_direction = Direction::LEFT;
   }
   else {
@@ -80,5 +87,7 @@ void SensorModel::compute()
 void SensorModel::sendCodes() {
   unsigned int lejos_codes[102] = {100, 1100, 100, 650, 100, 300, 150, 300, 100, 350, 100, 350, 100, 350, 100, 300, 150, 600, 100, 350, 100, 350, 100, 300, 150, 300, 150, 300, 100, 650, 100, 650, 100, 350, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
   irsend.sendRaw(lejos_codes, 102, 38);
+  //TV Remote test
+  //irsend.sendNEC(0x61A0F00F, 40);
 }
 #endif
